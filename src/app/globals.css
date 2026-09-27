@@ -1,0 +1,134 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  /* Cores Corporativas - SQP Consultoria */
+  --color-primary: #0B3C5D; /* Azul Escuro */
+  --color-secondary: #1D5F8A; /* Azul Médio */
+  --color-secondary-light: #2E86AB;
+  --color-accent: #4FB3D9; /* Azul Claro / Ciano */
+  --color-accent-light: #5BC0EB;
+  
+  /* Cores Neutras */
+  --color-white: #FFFFFF;
+  --color-gray-light: #F4F6F8;
+  --color-gray-medium: #E0E0E0;
+  --color-gray-dark: #4A4A4A;
+  --color-text: #333333; /* Grafite */
+
+  /* Espaçamentos e Medidas */
+  --border-radius: 8px;
+  --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --box-shadow-hover: 0 10px 15px rgba(0, 0, 0, 0.15);
+  
+  /* Tipografia */
+  --font-family: 'Inter', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+}
+
+/* Responsividade Global para Mobile */
+@media (max-width: 768px) {
+  h1 { font-size: 2.1rem; }
+  h2 { font-size: 1.65rem; }
+  h3 { font-size: 1.25rem; }
+
+  .container {
+    padding: 0 16px;
+  }
+
+  .section {
+    padding: 45px 0;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 { font-size: 1.8rem; }
+  h2 { font-size: 1.45rem; }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--color-primary);
+  margin-bottom: 1rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+h1 { font-size: 2.5rem; }
+h2 { font-size: 2rem; }
+h3 { font-size: 1.5rem; }
+
+p {
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+
+a {
+  color: var(--color-accent);
+  text-decoration: none;
+  transition: color 0.5s ease;
+}
+
+a:hover {
+  color: var(--color-primary);
+}
+
+/* Utilitários Comuns */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.section {
+  padding: 60px 0;
+}
+
+.section-light {
+  background-color: var(--color-gray-light);
+}
+
+.btn {
+  display: inline-block;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  padding: 12px 24px;
+  border-radius: var(--border-radius);
+  font-weight: 600;
+  text-align: center;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.5s ease, transform 0.4s ease;
+}
+
+.btn:hover {
+  background-color: var(--color-secondary);
+  color: var(--color-white);
+  transform: translateY(-2px);
+}
+
+.btn-accent {
+  background-color: var(--color-accent);
+}
+
+.btn-accent:hover {
+  background-color: var(--color-accent-light);
+}
+
+/* Gradients */
+.gradient-bg {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+  color: var(--color-white);
+}
+
+.gradient-bg h1, .gradient-bg h2, .gradient-bg p {
+  color: var(--color-white);
+}

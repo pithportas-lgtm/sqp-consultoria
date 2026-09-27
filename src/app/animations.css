@@ -1,0 +1,365 @@
+/* =============================================
+   SQP Consultoria — Animation System
+   Arquivo centralizado de keyframes, classes de
+   reveal-on-scroll e microinterações.
+   Usa apenas transform + opacity (GPU-accelerated).
+   Respeita prefers-reduced-motion.
+   ============================================= */
+
+/* ----- Keyframes ----- */
+
+/* Fade up para reveal on scroll */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Fade in simples */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Fade da esquerda */
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Fade da direita */
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Ken Burns — zoom lento contínuo no hero */
+@keyframes kenBurns {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.08);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Pulso suave para WhatsApp float */
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+  }
+  50% {
+    transform: scale(1.08);
+    box-shadow: 0 8px 25px rgba(37, 211, 102, 0.6);
+  }
+}
+
+/* Brilho de sweep nos botões */
+@keyframes btnSweep {
+  0% {
+    transform: translateX(-100%) skewX(-15deg);
+  }
+  100% {
+    transform: translateX(200%) skewX(-15deg);
+  }
+}
+
+/* ----- Reveal on Scroll (classes controladas por JS) ----- */
+
+/* Estado oculto: invisível, deslocado para baixo */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-30px);
+  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-right {
+  opacity: 0;
+  transform: translateX(30px);
+  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+/* Estado visível: ativado pelo Intersection Observer */
+.reveal.visible,
+.reveal-left.visible,
+.reveal-right.visible {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+/* Stagger delays para items em grids / listas */
+.stagger-1 { transition-delay: 0.12s; }
+.stagger-2 { transition-delay: 0.24s; }
+.stagger-3 { transition-delay: 0.36s; }
+.stagger-4 { transition-delay: 0.48s; }
+.stagger-5 { transition-delay: 0.6s; }
+
+/* ----- Hero Staggered Entrance ----- */
+
+.hero-animate-1 {
+  opacity: 0;
+  transform: translateY(25px);
+  animation: fadeInUp 1.0s cubic-bezier(0.22, 1, 0.36, 1) 0.15s forwards;
+}
+
+.hero-animate-2 {
+  opacity: 0;
+  transform: translateY(25px);
+  animation: fadeInUp 1.0s cubic-bezier(0.22, 1, 0.36, 1) 0.4s forwards;
+}
+
+.hero-animate-3 {
+  opacity: 0;
+  transform: translateY(25px);
+  animation: fadeInUp 1.0s cubic-bezier(0.22, 1, 0.36, 1) 0.65s forwards;
+}
+
+.hero-animate-4 {
+  opacity: 0;
+  transform: translateY(25px);
+  animation: fadeInUp 1.0s cubic-bezier(0.22, 1, 0.36, 1) 0.9s forwards;
+}
+
+/* ----- Botões — efeito sweep de brilho no hover ----- */
+
+.btn {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.25),
+    transparent
+  );
+  transform: translateX(-100%) skewX(-15deg);
+  transition: none;
+}
+
+.btn:hover::after {
+  animation: btnSweep 0.8s ease-out;
+}
+
+/* ----- Links com sublinhado animado ----- */
+
+.nav-link-animated {
+  position: relative;
+  display: inline-block;
+}
+
+.nav-link-animated::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--color-accent);
+  transition: width 0.5s ease;
+}
+
+.nav-link-animated:hover::after {
+  width: 100%;
+}
+
+/* ----- Cards interativos — elevação + sombra no hover ----- */
+
+.card-interactive {
+  transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.card-interactive:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 32px rgba(11, 60, 93, 0.15);
+}
+
+/* ----- Social icons — flutuação/pulso ----- */
+
+.social-icon-animated {
+  transition: transform 0.5s ease, background-color 0.5s ease;
+}
+
+.social-icon-animated:hover {
+  transform: translateY(-3px) scale(1.05);
+}
+
+/* ----- WhatsApp Float — pulso contínuo ----- */
+
+.whatsapp-pulse {
+  animation: pulse 2.5s ease-in-out infinite;
+}
+
+.whatsapp-pulse:hover {
+  animation: none;
+  transform: scale(1.15);
+}
+
+/* ----- Pills / tags animadas ----- */
+
+.pill-animated {
+  transition: transform 0.45s ease, background-color 0.45s ease,
+              border-color 0.45s ease, color 0.45s ease;
+}
+
+.pill-animated:hover {
+  transform: translateY(-2px);
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  border-color: var(--color-primary);
+}
+
+/* ----- Scroll progress bar ----- */
+
+.scroll-progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-accent), var(--color-accent-light));
+  z-index: 9999;
+  transform-origin: left;
+  transform: scaleX(0);
+  will-change: transform;
+  transition: none;
+}
+
+/* ----- Dynamic header scroll state ----- */
+
+.header-scrolled {
+  box-shadow: 0 2px 20px rgba(11, 60, 93, 0.15) !important;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  background-color: rgba(255, 255, 255, 0.95) !important;
+}
+
+.header-scrolled .headerContainer {
+  height: 60px !important;
+  transition: height 0.3s ease;
+}
+
+/* ----- Ken Burns no hero background ----- */
+
+.ken-burns-bg {
+  position: relative;
+  overflow: hidden;
+}
+
+.ken-burns-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: inherit;
+  animation: kenBurns 20s ease-in-out infinite;
+  z-index: 0;
+}
+
+.ken-burns-bg > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ----- Gradiente de sobreposição nas hero sections ----- */
+
+.gradient-overlay {
+  position: relative;
+}
+
+.gradient-overlay::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(11, 60, 93, 0.92) 0%,
+    rgba(29, 95, 138, 0.85) 50%,
+    rgba(46, 134, 171, 0.78) 100%
+  );
+  z-index: 0;
+}
+
+.gradient-overlay > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* =============================================
+   prefers-reduced-motion — Acessibilidade
+   Desativa TODAS as animações para usuários
+   que preferem menos movimento.
+   ============================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .reveal,
+  .reveal-left,
+  .reveal-right {
+    opacity: 1;
+    transform: none;
+  }
+
+  .hero-animate-1,
+  .hero-animate-2,
+  .hero-animate-3,
+  .hero-animate-4 {
+    opacity: 1;
+    transform: none;
+  }
+
+  .scroll-progress-bar {
+    display: none;
+  }
+
+  .whatsapp-pulse {
+    animation: none;
+  }
+}
