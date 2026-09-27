@@ -161,7 +161,7 @@
 /* ── Flip Card Wrapper ─────────────────────────────── */
 .flipCardWrapper {
   perspective: 1200px;
-  height: 300px;
+  height: 410px;
   cursor: pointer;
 }
 
@@ -337,7 +337,6 @@
   color: #CBD5E1 !important;
   line-height: 1.55 !important;
   margin: 0 0 14px !important;
-  flex-grow: 1;
 }
 
 .backList {
@@ -407,7 +406,7 @@
   }
 
   .flipCardWrapper {
-    height: 280px;
+    height: 410px;
   }
 }
 
