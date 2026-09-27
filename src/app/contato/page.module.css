@@ -295,9 +295,11 @@
     grid-template-columns: 1fr;
     gap: 30px;
   }
+
   .heroTitle {
     font-size: 2.5rem;
   }
+
   .formBox {
     padding: 30px 20px;
   }
